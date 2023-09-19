@@ -10,7 +10,7 @@ library(tidyverse)
 
 Let's import the `FAS_litters.csv` csv using a relative path. 
 
-```{r}
+```{r, litter relative}
 litters_df = 
   read_csv("data/FAS_litters.csv")
 
@@ -20,10 +20,44 @@ litters_df =
 
 Import the same dataset using an absolute path. 
 
-```{r, eval = FALSE}
+```{r, litter absolute, eval = FALSE}
 litters_df_abs  = 
   read_csv("~/Desktop/p8105/data_wrangling/data_wrangling_1/data/FAS_litters.csv")
 
 litters_df_abs = 
   janitor::clean_names(litters_df_abs)
 ```
+
+Now lets import the `FAS_pups.csv` dataset using a relative path. 
+
+```{r, pups relative}
+pups_df = 
+  read_csv("data/FAS_pups.csv")
+
+pups_df = 
+  janitor::clean_names(pups_df)
+```
+
+## Looking at the data 
+
+```{r}
+litters_df
+
+head(litters_df)
+
+tail(litters_df)
+```
+
+You can use `view`
+```{r, eval = FALSE}
+view(litters_df)
+```
+
+Looking at a data summary: 
+
+```{r}
+str(litters_df)
+
+skimr::skim(litters_df)
+```
+
