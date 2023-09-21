@@ -1,0 +1,70 @@
+---
+title: "Data Manipulation"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+Import FAS litters and pups. 
+
+```{r}
+litters_df = 
+  read.csv("data/FAS_litters.csv")
+litters_df = janitor::clean_names(litters_df)
+
+pups_df = 
+  read.csv("data/FAS_pups.csv")
+pups_df = janitor::clean_names(pups_df)
+```
+
+## `select` function 
+
+`select` is used to select columns! 
+
+```{r}
+#selecting only certian variables 
+select(litters_df, group, litter_number, gd0_weight)
+
+select(litters_df, group, gd0_weight:gd_of_birth)
+
+select(litters_df, group, starts_with("pups"))
+
+#removing columns with - 
+select(litters_df, -litter_number)
+
+select(litters_df, -starts_with("gd"))
+
+#renaming column titles 
+select(litters_df, group, litter_id = litter_number)
+
+select(litters_df, group, litter_id = litter_number, everything())
+
+#reordering and keeping everything else 
+select(litters_df, gd0_weight, everything())
+```
+
+
+```{r}
+#short-hand for renaming a column
+rename(litters_df, litter_id = litter_number)
+
+#moves a column up to the first column position 
+relocate(litters_df, litter_number)
+```
+
+`select` vs. `pull`
+```{r}
+select(litters_df, group)
+#select keeps the output in a datafram 
+pull(litters_df, group)
+#pull puts the output into a vector and follows tidyverse logic 
+```
+
+
+Learning Assessment: 
+```{r}
+select(pups_df, litter_number, sex, pd_ears)
+```
+
