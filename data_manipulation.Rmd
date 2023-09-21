@@ -68,3 +68,59 @@ Learning Assessment:
 select(pups_df, litter_number, sex, pd_ears)
 ```
 
+## `filter`
+
+You can get rid of rows using `filter()`
+
+```{r}
+#keeps only the data that satisfies the group == ""
+filter(litters_df, group == "Con7")
+
+#! means not, keeps everything BUT the thing after group ==
+filter(litters_df, group != "Con7")
+
+#using comparison 
+filter(litters_df, gd0_weight > 20 )
+
+filter(litters_df, group == "Con7"| group == "Con8")
+
+filter(litters_df, group %in% c("Con7", "Con8"))
+       
+filter(litters_df, !(group == "Con7"))       
+```
+
+what about missing rows? 
+```{r}
+#get rid of anything that has missing values 
+drop_na(litters_df)
+
+#drop things that have missing values only in specified column 
+drop_na(litters_df, gd0_weight)
+```
+
+
+## `mutate` 
+
+this is used to add or change variables 
+
+```{r}
+#doing math between columns
+mutate(litters_df, wt_gain = gd18_weight - gd0_weight)
+
+#convert group variable to lower case 
+mutate(litters_df, group = str_to_lower(group))
+
+mutate(
+  litters_df, 
+  wt_gain = gd18_weight - gd0_weight,
+  group = str_to_lower(group)
+)
+```
+
+## `arrange`
+
+```{r}
+arrange(litters_df, gd0_weight)
+arrange(litters_df, group, gd0_weight)
+```
+
